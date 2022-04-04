@@ -5,22 +5,29 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 cos_mov1 = pd.read_csv('pop_key_movies.csv')
+# print(cos_mov1)
 
 #Helper Functions
-# def get_title_from_index(index):
-#     return cos_mov1[cos_mov1.index == index]["title"].values[0]
+def get_title_from_index(index):
+    return cos_mov1[cos_mov1.index == index]["title"].values[0]
 
-# def get_index_from_title(title):
-#     return cos_mov1[cos_mov1.title == title]["index"].values[0]
+def get_index_from_title(title):
+    return cos_mov1[cos_mov1.title == title]["index"].values[0]
 
-# def get_combined_features(index):
-#     return cos_mov1[cos_mov1.index == index]["combined_features"].values[0]
+def get_combined_features(index):
+    return cos_mov1[cos_mov1.index == index]["combined_features"].values[0]
 
 def get_id_from_index(index):
     return cos_mov1[cos_mov1.index == index]["id"].values[0]
 
 def get_index_from_id(id):
-    return cos_mov1[cos_mov1.id == id]["index"].values[0]
+    return cos_mov1[cos_mov1.id == id]["index"].values[0] 
+
+# def get_id_from_title(title):
+#     return cos_mov1[cos_mov1["title"] == title]["id"].values[0]
+
+# def get_title_from_id(id):
+#     return cos_mov1[cos_mov1["id"] == id]["title"].values[0]
 
 
 vectorizer = TfidfVectorizer()
@@ -42,11 +49,13 @@ def recSingleMovie(title, similarity):
             break
     return top_recs
 
-#returns a list of recommended movies from a list of liked movies
+# Returns a list of recommended movies from a list of liked movies
 def recListMovie(liked_list):
+    if not isinstance(liked_list, list):
+        liked_list = liked_list.split(",")
     movie_recs = []
     for i in range(len(liked_list)):
-        single_movie_recs = recSingleMovie(liked_list[i], similarity)
+        single_movie_recs = recSingleMovie(int(float(liked_list[i])), similarity)
         k=0
         for j in range(len(single_movie_recs)):
             pos = k*(i+1)
@@ -57,7 +66,7 @@ def recListMovie(liked_list):
                 k=k+1
     return movie_recs
 
-# Test recListMovie function
+# # Test recListMovie function
 # liked_list = [315946, 194079, 315946]
 # movie100 = recListMovie(liked_list)
 # for x in movie100:
