@@ -4,18 +4,18 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-cos_mov1 = pd.read_csv('pop_key_movies.csv')
+cos_mov1 = pd.read_csv('pop_key_movies30000.csv')
 # print(cos_mov1)
 
 #Helper Functions
-def get_title_from_index(index):
-    return cos_mov1[cos_mov1.index == index]["title"].values[0]
+# def get_title_from_index(index):
+#     return cos_mov1[cos_mov1.index == index]["title"].values[0]
 
-def get_index_from_title(title):
-    return cos_mov1[cos_mov1.title == title]["index"].values[0]
+# def get_index_from_title(title):
+#     return cos_mov1[cos_mov1.title == title]["index"].values[0]
 
-def get_combined_features(index):
-    return cos_mov1[cos_mov1.index == index]["combined_features"].values[0]
+# def get_combined_features(index):
+#     return cos_mov1[cos_mov1.index == index]["combined_features"].values[0]
 
 def get_id_from_index(index):
     return cos_mov1[cos_mov1.index == index]["id"].values[0]
