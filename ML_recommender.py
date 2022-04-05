@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-cos_mov1 = pd.read_csv('pop_key_movies15000.csv')
+cos_mov1 = pd.read_csv('pop_key_movies10000.csv')
 # print(cos_mov1)
 
 #Helper Functions
